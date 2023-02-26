@@ -31,10 +31,6 @@ class MyWidget(QMainWindow):
         self.update()
 
 
-
-
-
-
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     ex = MyWidget()
