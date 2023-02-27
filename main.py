@@ -1,15 +1,15 @@
 import sys
-from UI import Ui_MainWindow
+from PyQt5 import uic
 from PyQt5.QtWidgets import QApplication, QMainWindow
-from PyQt5.QtGui import QPainter, QPen, QColor
+from PyQt5.QtGui import QPainter, QBrush, QPen
 from PyQt5.QtCore import Qt
 from random import randint
 
 
-class MyWidget(QMainWindow, Ui_MainWindow):
+class MyWidget(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setupUi(self)
+        uic.loadUi('UI.ui', self)
         QMainWindow.setFixedSize(self, 800, 600)
         self.pushButton.clicked.connect(self.creating_cirles)
         self.drawing = False
@@ -18,12 +18,9 @@ class MyWidget(QMainWindow, Ui_MainWindow):
         if self.drawing:
             painter = QPainter()
             painter.begin(self)
+            painter.setPen(QPen(Qt.yellow, 7, Qt.SolidLine))
 
             for i in range(3):
-                r = randint(0, 255)
-                g = randint(0, 255)
-                b = randint(0, 255)
-                painter.setPen(QPen(QColor(r, g, b), 7, Qt.SolidLine))
                 x = randint(1, 700)
                 y = randint(1, 500)
                 d = randint(2, 300)
@@ -33,7 +30,7 @@ class MyWidget(QMainWindow, Ui_MainWindow):
         self.drawing = True
         self.update()
 
-
+        
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     ex = MyWidget()
